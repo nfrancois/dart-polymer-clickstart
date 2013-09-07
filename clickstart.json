@@ -1,0 +1,24 @@
+{
+    "id": "dart-polymer-clickstart",
+    "name": "Dart - Polymer",
+    "source": "github",
+    "description": "A Dart Language Todo samples (server and client) developed with Polymer with continuous deployment/testing",
+    "icon": "https://d3ko533tu1ozfq.cloudfront.net/clickstart/dart-logo.png",
+
+    "supported-by" : "community",
+    "order" : 2,
+
+    "runtime": {
+        "type": "dart",
+         "app-parameters" : { 
+            "runtime.PLUGIN.SRC.dart": "https://s3.amazonaws.com/clickstacks/nicofrancois/dart-plugin.zip"
+        }    
+    },
+    "build-with-jenkins": {
+	"template": {
+            "type": "https://raw.github.com/nfrancois/dart-polymer-clickstart/master/jenkins.xml",
+            "options": {
+            }            
+        }
+    }
+}
