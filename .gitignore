@@ -3,5 +3,6 @@ packages
 pubspec.lock
 app/web/out
 .buildlog
-app/test/out
+app/**/out
 *.dart.js*
+web/out/
