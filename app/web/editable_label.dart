@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-library editable_label;
+library todomvc.web.editable_label;
 
 import 'dart:html';
 import 'package:polymer/polymer.dart';
@@ -11,24 +11,35 @@ import 'package:polymer/polymer.dart';
  * Label whose [value] can be edited by double clicking. When editing, it
  * displays a form and input element, otherwise it displays the label.
  */
-class EditableLabel extends PolymerElement with ObservableMixin {
+// For illustration purposes this type uses Polymer.register instead of
+// CustomTag. We must mark it @reflectable to ensure its members
+// (the event handlers) are preserved and can be referenced from HTML.
+@reflectable
+class EditableLabel extends PolymerElement {
   @observable bool editing = false;
-  @observable String value = '';
+  @published String value = '';
+
+  factory EditableLabel() => new Element.tag('editable-label');
+
+  EditableLabel.created() : super.created();
+
   bool get applyAuthorStyles => true;
 
-  InputElement get _editBox => getShadowRoot("editable-label").query('#edit');
+  ShadowRoot get _shadowRoot => getShadowRoot('editable-label');
+
+  InputElement get _editBox => _shadowRoot.query('#edit');
 
   void edit() {
     editing = true;
 
-    // This causes _editBox to be inserted.
-    performMicrotaskCheckpoint();
-
-    // For IE and Firefox: use .focus(), then reset the value to move the
-    // cursor to the end.
-    _editBox.focus();
-    _editBox.value = '';
-    _editBox.value = value;
+    // Wait for _editBox to be inserted.
+    onMutation(_shadowRoot).then((_) {
+      // For IE and Firefox: use .focus(), then reset the value to move the
+      // cursor to the end.
+      _editBox.focus();
+      _editBox.value = '';
+      _editBox.value = value;
+    });
   }
 
   void update(Event e) {
@@ -45,6 +56,7 @@ class EditableLabel extends PolymerElement with ObservableMixin {
   }
 }
 
-void main() {
-  registerPolymerElement('editable-label', () => new EditableLabel());
+@initMethod
+void _init() {
+  Polymer.register('editable-label', EditableLabel);
 }

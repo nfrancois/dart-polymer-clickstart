@@ -2,13 +2,14 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-library model;
+library todomvc.web.model;
 
 import 'package:polymer/polymer.dart';
 
 final appModel = new AppModel._();
 
-class AppModel extends ObservableBase {
+@reflectable
+class AppModel extends Observable {
   final ObservableList<Todo> todos = new ObservableList<Todo>();
   @observable int doneCount;
   @observable int remaining;
@@ -58,7 +59,7 @@ class AppModel extends ObservableBase {
   void clearDone() => todos.removeWhere((t) => t.done);
 }
 
-class Todo extends ObservableBase {
+class Todo extends Observable {
   @observable String task;
   @observable bool done = false;
 

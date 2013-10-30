@@ -3,10 +3,11 @@ Copyright (c) 2013, the Dart project authors.  Please see the AUTHORS file
 for details. All rights reserved. Use of this source code is governed by a
 BSD-style license that can be found in the LICENSE file.
 -->
+<meta charset="utf-8">
 <link rel="import" href="editable_label.html">
-<polymer-element name="todo-row" extends="li" attributes="todo">
+<polymer-element name="todo-row" extends="li">
   <template>
-    <style scoped>
+    <style>
 .todo-item {
   position: relative;
   font-size: 24px;
@@ -119,7 +120,7 @@ ShadowRoot because it crosses the shadow boundary.
     <div class="todo-item">
       <input class="toggle" type="checkbox" checked="{{todo.done}}">
       <editable-label id="label" value="{{todo.task}}"></editable-label>
-      <button class="destroy" on-click="removeTodo"></button>
+      <button class="destroy" on-click="{{removeTodo}}"></button>
     </div>
   </template>
   <script type="application/dart" src="todo_row.dart"></script>

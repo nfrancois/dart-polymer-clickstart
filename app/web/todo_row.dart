@@ -2,28 +2,32 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-library todo_row;
+library todomvc.web.todo_row;
 
+import 'dart:html';
 import 'package:polymer/polymer.dart';
 import 'model.dart';
 
 @CustomTag('todo-row')
-class TodoRow extends PolymerElement with ObservableMixin {
-  @observable Todo todo;
+class TodoRow extends LIElement with Polymer, Observable {
+  @published Todo todo;
 
   bool get applyAuthorStyles => true;
 
-  // TODO(sigmund,terry): bring back scoped-css polyfills
+  factory TodoRow() => new Element.tag('todo-row');
 
-  void created() {
-    super.created();
+  TodoRow.created() : super.created() {
+    polymerCreated();
+  }
+
+  void ready() {
     var root = getShadowRoot("todo-row");
-    var label = root.query('#label').xtag;
+    var label = root.query('#label');
     var item = root.query('.todo-item');
 
     bindCssClass(item, 'completed', this, 'todo.done');
     bindCssClass(item, 'editing', label, 'editing');
   }
 
-  void removeTodo() => appModel.todos.remove(todo);
+  void removeTodo() { appModel.todos.remove(todo); }
 }

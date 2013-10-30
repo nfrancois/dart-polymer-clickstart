@@ -2,7 +2,7 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-library router_options;
+library todomvc.web.router_options;
 
 import 'dart:html';
 import 'package:polymer/polymer.dart';
@@ -16,13 +16,18 @@ import 'package:polymer/polymer.dart';
  * `class="selected"`, and other links will have that CSS class removed.
  */
 @CustomTag('router-options')
-class RouterOptions extends PolymerElement {
+class RouterOptions extends UListElement with Polymer, Observable {
+  factory RouterOptions() => new Element.tag('ul', 'router-options');
+
+  RouterOptions.created() : super.created() {
+    polymerCreated();
+  }
 
   bool get applyAuthorStyles => true;
   var _sub;
 
-  void inserted() {
-    super.inserted();
+  void enteredView() {
+    super.enteredView();
 
     var anchors = this.queryAll('a');
 
@@ -42,8 +47,8 @@ class RouterOptions extends PolymerElement {
     _sub = windowLocation.changes.listen(_updateHash);
   }
 
-  void removed() {
+  void leftView() {
     _sub.cancel();
-    super.removed();
+    super.leftView();
   }
 }
