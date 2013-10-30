@@ -1,8 +1,6 @@
 packages
 .DS_Store
 pubspec.lock
-app/web/out
+out/
 .buildlog
-app/**/out
 *.dart.js*
-web/out/
