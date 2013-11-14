@@ -1,1 +1,7 @@
+packages
+.DS_Store
+pubspec.lock
+out/
+.buildlog
+*.dart.js*
 build
