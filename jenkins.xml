@@ -92,7 +92,7 @@ cd app
 
 # Build dart application
 
-pub install
+pub get
 
 dartanalyzer main.dart
 
