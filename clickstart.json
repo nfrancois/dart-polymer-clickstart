@@ -11,7 +11,7 @@
     "runtime": {
         "type": "dart",
          "app-parameters" : { 
-            "runtime.PLUGIN.SRC.dart": "https://s3.amazonaws.com/clickstacks/nicofrancois/dart-plugin.zip"
+            "runtime.PLUGIN.SRC.dart": "https://s3.amazonaws.com/clickstacks/nicofrancois/dart-plugin-1.0.zip"
         }    
     },
     "build-with-jenkins": {
