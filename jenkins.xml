@@ -97,30 +97,21 @@ pub get
 
 dartanalyzer main.dart
 
-#echo "Run tests..."
-#dart test/test.dart
-
-echo "Build Web UI app..."
-dart build.dart
-
-echo "Compile to js..."
-dart2js --checked --minify --out=web/out/index.html_bootstrap.dart.js web/out/index.html_bootstrap.dart
+echo "Build/Compile Polymer app..."
+pub deploy
 
 echo "Copy compiled files..."
-rm web/out/*.map web/out/*.deps
-cp -a web/out/* web/
+rm -rf web
+mv build web
 
 echo "Clean..."
 rm pubspec.lock
-rm -rf web/out
-rm -rf test/out
+rm -rf web/packages
 rm -rf packages
-rm test/packages
-rm web/packages
 
 echo "Package app to deploy..."
 
-rm -rf ../target/app.zip
+rm -f ../target/app.zip
 zip -r ../target/app.zip *
 
 

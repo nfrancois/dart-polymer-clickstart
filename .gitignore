@@ -4,4 +4,4 @@ pubspec.lock
 out/
 .buildlog
 *.dart.js*
-build
+buildtarget
